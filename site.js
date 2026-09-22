@@ -138,6 +138,17 @@ const specimens = {
   }
 };
 
+/* --------------------------------------------------------------------------
+   Wiring
+   -------------------------------------------------------------------------- */
+
+/** Render a specimen's payload exactly as the clipboard will receive it. */
+function renderSpecimen(key) {
+  const specimen = specimens[key];
+  if (!specimen) return null;
+  return specimen.transform(specimen.payload);
+}
+
 document.querySelectorAll("[data-demo]").forEach(button => {
   button.addEventListener("click", async () => {
     const specimen = specimens[button.dataset.demo];
@@ -149,6 +160,29 @@ document.querySelectorAll("[data-demo]").forEach(button => {
   });
 });
 
+/* Keep transport visible: each inspector shows the literal text that the
+   button beside it would copy. Filled on first open, not on page load. */
+document.querySelectorAll("[data-inspect]").forEach(details => {
+  details.addEventListener("toggle", () => {
+    if (!details.open || details.dataset.filled) return;
+
+    const text = renderSpecimen(details.dataset.inspect);
+    if (text == null) return;
+
+    const meta = document.createElement("p");
+    meta.className = "inspect-meta";
+    meta.textContent = `${text.length} characters · plain text · nothing is sent anywhere`;
+
+    const pre = document.createElement("pre");
+    pre.textContent = text;
+
+    details.append(meta, pre);
+    details.dataset.filled = "true";
+  });
+
+  if (details.open) details.dispatchEvent(new Event("toggle"));
+});
+
 $("#copy-orchestrator")?.addEventListener("click", async event => {
   const result = await offboard({
     payload: { meeting, responses: fakeResponses },
@@ -156,17 +190,6 @@ $("#copy-orchestrator")?.addEventListener("click", async event => {
     label: "cactus treaty orchestrator pack"
   });
   showResult(event.currentTarget, result);
-});
-
-document.querySelectorAll(".stars").forEach(group => {
-  const buttons = [...group.querySelectorAll("button")];
-  buttons.forEach((button, index) => {
-    button.addEventListener("click", () => {
-      const rating = index + 1;
-      group.dataset.rating = String(rating);
-      buttons.forEach((star, i) => star.classList.toggle("on", i < rating));
-    });
-  });
 });
 
 $("#copy-feedback")?.addEventListener("click", async event => {
@@ -178,7 +201,7 @@ $("#copy-feedback")?.addEventListener("click", async event => {
 
   const evaluations = [...document.querySelectorAll("[data-feedback-id]")].map(card => ({
     id: card.dataset.feedbackId,
-    rating: Number(card.querySelector(".stars").dataset.rating || 0) || null,
+    rating: Number(card.querySelector(".stars input:checked")?.value) || null,
     comment: card.querySelector(".feedback-comment").value.trim()
   }));
 
@@ -198,18 +221,45 @@ $("#copy-feedback")?.addEventListener("click", async event => {
   showResult(event.currentTarget, result);
 });
 
+/* Mark the section actually on screen, rather than hard-coding one. */
+const sideLinks = new Map(
+  [...document.querySelectorAll(".side-link[href^='#']")].map(link => [link.hash.slice(1), link])
+);
+
+if (sideLinks.size && "IntersectionObserver" in window) {
+  const spy = new IntersectionObserver(
+    entries => {
+      const visible = entries.find(entry => entry.isIntersecting);
+      if (!visible) return;
+      sideLinks.forEach(link => link.removeAttribute("aria-current"));
+      sideLinks.get(visible.target.id)?.setAttribute("aria-current", "true");
+    },
+    { rootMargin: "-56px 0px -65% 0px" }
+  );
+
+  sideLinks.forEach((_, id) => {
+    const section = document.getElementById(id);
+    if (section) spy.observe(section);
+  });
+}
+
+/* Feedback never relies on colour alone: the label changes too (AGENTS.md 8). */
 function showResult(button, result) {
-  const original = button.textContent;
+  const original = button.dataset.label ?? button.textContent;
+  button.dataset.label = original;
+
   if (result.ok) {
     button.dataset.state = "copied";
-    button.textContent = "COPIED ✓";
+    button.textContent = "Copied ✓";
     showToast(`${result.characters} characters copied`);
   } else {
     button.dataset.state = "error";
-    button.textContent = "COPY FAILED";
+    button.textContent = "Copy failed ✕";
     showToast("Clipboard access failed.");
   }
-  window.setTimeout(() => {
+
+  window.clearTimeout(button.resetTimer);
+  button.resetTimer = window.setTimeout(() => {
     button.textContent = original;
     delete button.dataset.state;
   }, 1600);
@@ -217,7 +267,7 @@ function showResult(button, result) {
 
 function showToast(message) {
   toast.textContent = message;
-  toast.classList.add("show");
+  toast.dataset.show = "true";
   window.clearTimeout(showToast.timer);
-  showToast.timer = window.setTimeout(() => toast.classList.remove("show"), 1800);
+  showToast.timer = window.setTimeout(() => delete toast.dataset.show, 1800);
 }
