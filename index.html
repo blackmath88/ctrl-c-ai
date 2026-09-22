@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="ctrl-c-ai — clipboard-mediated AI handoff patterns">
+  <title>ctrl-c-ai — when MCP is too much</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top"><span class="brand-mark">⌘C</span><span>ctrl-c-ai</span></a>
+    <nav class="topnav" aria-label="Primary">
+      <a href="#patterns">Patterns</a>
+      <a href="#playground">Playground</a>
+      <a href="#architecture">Architecture</a>
+      <a href="./docs/whitepaper.md">Paper</a>
+    </nav>
+    <a class="github-link" href="https://github.com/blackmath88/ctrl-c-ai">GitHub ↗</a>
+  </header>
+
+  <div class="layout" id="top">
+    <aside class="sidebar" aria-label="Documentation">
+      <div class="search-fake">Search patterns… <span style="margin-left:auto">⌘ K</span></div>
+
+      <div class="nav-label">Documentation</div>
+      <a class="side-link active" href="#top"><span>Overview</span></a>
+      <a class="side-link" href="./docs/whitepaper.md"><span>Why clipboard?</span></a>
+      <a class="side-link" href="./docs/implementation.md"><span>Implementation</span></a>
+
+      <div class="nav-label">Patterns</div>
+      <a class="side-link" href="#context"><span>Context Offboard</span><span class="badge">01</span></a>
+      <a class="side-link" href="#prompt"><span>Prompt Offboard</span><span class="badge">02</span></a>
+      <a class="side-link" href="#selection"><span>Selection Offboard</span><span class="badge">03</span></a>
+      <a class="side-link" href="#typed"><span>Typed Offboard</span><span class="badge">04</span></a>
+      <a class="side-link" href="#roundtrip"><span>Roundtrip</span><span class="badge">05</span></a>
+
+      <div class="nav-label">Reference</div>
+      <a class="side-link" href="#architecture"><span>Integration ladder</span></a>
+      <a class="side-link" href="./src/offboard.js"><span>offboard.js</span></a>
+    </aside>
+
+    <main>
+      <section class="hero">
+        <div>
+          <div class="kicker">Human-mediated integration · v0.1</div>
+          <h1>Sometimes the integration you need is a copy button.</h1>
+          <p>
+            A deliberately low-tech pattern library for turning application state into portable,
+            inspectable context for any LLM. No API required. No provider SDK. The human remains
+            the transport and approval boundary.
+          </p>
+        </div>
+        <div class="protocol" aria-label="Protocol">
+          <div class="protocol-row"><span>01</span><span>STATE</span></div>
+          <div class="protocol-row"><span>02</span><span>TRANSFORM</span></div>
+          <div class="protocol-row"><span>03</span><span>COPY</span></div>
+          <div class="protocol-row"><span>04</span><span>PASTE</span></div>
+          <div class="protocol-row"><span>05</span><span>THINK</span></div>
+          <div class="protocol-note">The button is boring. The useful part is deciding what crosses the boundary.</div>
+        </div>
+      </section>
+
+      <section class="section" id="patterns">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Pattern library</div>
+            <h2>Five useful ways to offboard.</h2>
+          </div>
+          <p>Each pattern uses the same transport. What changes is the transformation, scope, and contract around it.</p>
+        </div>
+
+        <div class="pattern-grid">
+          <article class="card" id="context">
+            <div class="card-number">01 / STATE → MARKDOWN</div>
+            <h3>Context Offboard</h3>
+            <p>Package the current project, case or screen into a clean, human-readable brief.</p>
+            <div class="card-actions"><button class="btn btn-primary" data-demo="context">Copy specimen</button></div>
+          </article>
+
+          <article class="card" id="prompt">
+            <div class="card-number">02 / STATE + TASK</div>
+            <h3>Prompt Offboard</h3>
+            <p>Add an explicit job to the context: critique this, explain it, find holes, plan next actions.</p>
+            <div class="card-actions"><button class="btn btn-primary" data-demo="prompt">Copy specimen</button></div>
+          </article>
+
+          <article class="card" id="selection">
+            <div class="card-number">03 / CURRENT VIEW ONLY</div>
+            <h3>Selection Offboard</h3>
+            <p>Copy only what the person has filtered, selected or focused — not the whole application.</p>
+            <div class="card-actions"><button class="btn btn-primary" data-demo="selection">Copy specimen</button></div>
+          </article>
+
+          <article class="card" id="typed">
+            <div class="card-number">04 / SCHEMA → JSON</div>
+            <h3>Typed Offboard</h3>
+            <p>Use structured JSON when downstream interpretation needs stable field names or re-import later.</p>
+            <div class="card-actions"><button class="btn btn-primary" data-demo="typed">Copy JSON</button></div>
+          </article>
+
+          <article class="card">
+            <div class="card-number">05 / COPY + DESTINATION</div>
+            <h3>Copy + Open</h3>
+            <p>Copy first, then open the user's chosen LLM. Still manual. Still visible. Just one less step.</p>
+            <div class="card-actions">
+              <button class="btn" data-demo="prompt" data-open="https://chatgpt.com">ChatGPT ↗</button>
+              <button class="btn" data-demo="prompt" data-open="https://claude.ai">Claude ↗</button>
+            </div>
+          </article>
+
+          <article class="card" id="roundtrip">
+            <div class="card-number">06 / EXPORT ↔ IMPORT</div>
+            <h3>Roundtrip Offboard</h3>
+            <p>Ask the model to return a known schema, then validate and import it back into the originating tool.</p>
+            <div class="card-actions"><a class="btn btn-accent" href="./docs/patterns.md#roundtrip-offboard">Read contract</a></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="playground">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Live specimen</div>
+            <h2>Transform before transport.</h2>
+          </div>
+          <p>Edit the state. Change the task. The payload updates locally and only leaves when you press copy.</p>
+        </div>
+
+        <div class="specimen">
+          <div class="specimen-copy">
+            <div class="eyebrow">Context + task → portable prompt</div>
+            <h3>Project handoff</h3>
+            <p>This is the useful middle layer: software knows the state; the user chooses what kind of thinking they want next.</p>
+
+            <div class="field">
+              <label for="title">PROJECT</label>
+              <input id="title" value="Project Atlas">
+            </div>
+
+            <div class="inline-grid">
+              <div class="field">
+                <label for="status">STATUS</label>
+                <select id="status">
+                  <option>Exploring</option>
+                  <option selected>Blocked</option>
+                  <option>Ready for review</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="owner">OWNER</label>
+                <input id="owner" value="Product + Change">
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="evidence">EVIDENCE</label>
+              <textarea id="evidence">Pilot complete
+Users understand the prototype
+Legal review still pending</textarea>
+            </div>
+
+            <div class="field">
+              <label for="task">TASK</label>
+              <textarea id="task">Challenge the current plan. Find missing evidence, hidden assumptions and the three most useful next moves.</textarea>
+            </div>
+
+            <div class="card-actions">
+              <button class="btn btn-primary" id="copy-playground">Copy offboard</button>
+              <button class="btn" id="copy-json">Copy JSON</button>
+            </div>
+          </div>
+
+          <div class="specimen-output" aria-live="polite">
+            <pre id="preview"></pre>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="architecture">
+        <div class="section-head">
+          <div>
+            <div class="kicker">Progressive integration</div>
+            <h2>Use the smallest rung that works.</h2>
+          </div>
+          <p>Clipboard offboarding is intentionally near the bottom of the ladder. That is a feature, not an embarrassment.</p>
+        </div>
+
+        <div class="ladder">
+          <div class="ladder-step active"><strong>Clipboard</strong><p>Visible, manual, provider-agnostic. Good for low-frequency handoff and prototypes.</p></div>
+          <div class="ladder-step"><strong>Deep link</strong><p>Copy + open a destination. Still human mediated.</p></div>
+          <div class="ladder-step"><strong>API</strong><p>Automated transport with credentials, lifecycle and error handling.</p></div>
+          <div class="ladder-step"><strong>MCP</strong><p>Model-visible tools and resources with an explicit capability surface.</p></div>
+          <div class="ladder-step"><strong>Agent</strong><p>Persistent orchestration, authority, policy and evaluation become first-class concerns.</p></div>
+        </div>
+
+        <div class="callout">
+          <strong>Rule of thumb:</strong> if a person needs the handoff occasionally and should inspect the context anyway, a clipboard boundary can be the more honest architecture.
+        </div>
+
+        <div class="code-block">import { offboard, composePrompt } from "./src/offboard.js";
+
+await offboard({
+  payload: appState,
+  transform: state => composePrompt({
+    context: state,
+    task: "Find contradictions and propose next actions.",
+    output: "Observations, missing evidence, risks, next actions."
+  })
+});</div>
+      </section>
+
+      <footer class="footer">
+        <span>ctrl-c-ai · clipboard as an integration boundary</span>
+        <span>small enough to steal</span>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script type="module" src="./site.js"></script>
+</body>
+</html>
