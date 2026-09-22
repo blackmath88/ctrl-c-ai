@@ -1,4 +1,6 @@
-import { copyAndOpen, composePrompt, offboard, toJSON, toMarkdown } from "./src/offboard.js";\nimport { meetingParticipantPrompt } from "./src/meeting-brief.js";
+import { copyAndOpen, composePrompt, offboard, toJSON, toMarkdown } from "./src/offboard.js";
+import { meetingParticipantPrompt } from "./src/meeting-brief.js";
+import { exampleRequestPrompt } from "./src/feedback-loop.js";
 
 const $ = selector => document.querySelector(selector);
 const toast = $("#toast");
@@ -44,6 +46,27 @@ const specimens = {
       thesis: "The idea should sometimes be the image.",
       evidence: ["picture-superiority research", "processing fluency"],
       task: "Stress-test the thesis and identify where the evidence does not support the design judgement."
+    }
+  },
+  meeting: {
+    transform: value => meetingParticipantPrompt(value),
+    payload: {
+      meeting: {
+        id: "meeting-001",
+        title: "Project alignment",
+        purpose: "Surface assumptions before deciding the next delivery step.",
+        participants: ["Participant A", "Participant B"]
+      },
+      participantLabel: "participant-a"
+    }
+  },
+  feedback: {
+    transform: value => exampleRequestPrompt(value),
+    payload: {
+      goal: "Create four names for a deliberately low-tech AI handoff pattern.",
+      count: 4,
+      criteria: ["memorable", "clear enough to explain", "not generic enterprise language"],
+      context: "The pattern transforms application state into a portable clipboard payload for a human to paste into any LLM."
     }
   }
 };
