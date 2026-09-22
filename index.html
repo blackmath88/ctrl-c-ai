@@ -33,7 +33,7 @@
       <a class="side-link" href="#prompt"><span>Prompt Offboard</span><span class="badge">02</span></a>
       <a class="side-link" href="#selection"><span>Selection Offboard</span><span class="badge">03</span></a>
       <a class="side-link" href="#typed"><span>Typed Offboard</span><span class="badge">04</span></a>
-      <a class="side-link" href="#roundtrip"><span>Roundtrip</span><span class="badge">05</span></a>
+      <a class="side-link" href="#roundtrip"><span>Roundtrip</span><span class="badge">05</span></a>\n      <a class="side-link" href="#meeting-brief"><span>Meeting Brief Relay</span><span class="badge">06</span></a>
 
       <div class="nav-label">Reference</div>
       <a class="side-link" href="#architecture"><span>Integration ladder</span></a>
@@ -65,7 +65,7 @@
         <div class="section-head">
           <div>
             <div class="kicker">Pattern library</div>
-            <h2>Five useful ways to offboard.</h2>
+            <h2>Small patterns. Surprisingly useful workflows.</h2>
           </div>
           <p>Each pattern uses the same transport. What changes is the transformation, scope, and contract around it.</p>
         </div>
@@ -114,6 +114,16 @@
             <h3>Roundtrip Offboard</h3>
             <p>Ask the model to return a known schema, then validate and import it back into the originating tool.</p>
             <div class="card-actions"><a class="btn btn-accent" href="./docs/patterns.md#roundtrip-offboard">Read contract</a></div>
+          </article>
+
+          <article class="card" id="meeting-brief">
+            <div class="card-number">07 / TWO PEOPLE → TWO JSONS → ONE BRIEF</div>
+            <h3>Meeting Brief Relay</h3>
+            <p>Give both people the same prep pack. Each uses their own LLM and returns structured JSON. An orchestrator preserves shared ground, differences and unresolved questions.</p>
+            <div class="card-actions">
+              <button class="btn btn-primary" data-demo="meeting">Copy participant pack</button>
+              <a class="btn" href="./docs/meeting-brief.md">See workflow</a>
+            </div>
           </article>
         </div>
       </section>
