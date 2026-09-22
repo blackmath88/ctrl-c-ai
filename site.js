@@ -226,21 +226,46 @@ const sideLinks = new Map(
   [...document.querySelectorAll(".side-link[href^='#']")].map(link => [link.hash.slice(1), link])
 );
 
-if (sideLinks.size && "IntersectionObserver" in window) {
-  const spy = new IntersectionObserver(
-    entries => {
-      const visible = entries.find(entry => entry.isIntersecting);
-      if (!visible) return;
-      sideLinks.forEach(link => link.removeAttribute("aria-current"));
-      sideLinks.get(visible.target.id)?.setAttribute("aria-current", "true");
-    },
-    { rootMargin: "-56px 0px -65% 0px" }
-  );
+/* #top wraps the whole page, so it is the fallback rather than a target: it
+   wins only while no section occupies the reading band. */
+const overview = sideLinks.get("top");
+const sections = [...sideLinks.keys()]
+  .filter(id => id !== "top")
+  .map(id => document.getElementById(id))
+  .filter(Boolean);
 
-  sideLinks.forEach((_, id) => {
-    const section = document.getElementById(id);
-    if (section) spy.observe(section);
-  });
+if (sections.length) {
+  const HEADER = 57; // the sticky topbar, plus a pixel of tolerance
+  let queued = false;
+
+  /* The active section is the last one whose top has passed under the header.
+     Asking each rect directly avoids the boundary case that trips up an
+     intersection band, where the outgoing and incoming sections overlap it
+     by a fraction of a pixel and either could be picked. */
+  const sync = () => {
+    queued = false;
+
+    let active = null;
+    for (const section of sections) {
+      if (section.getBoundingClientRect().top <= HEADER) active = section;
+    }
+
+    // The last section can be too short to ever reach the header.
+    const bottom = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 2;
+    if (bottom) active = sections[sections.length - 1];
+
+    sideLinks.forEach(link => link.removeAttribute("aria-current"));
+    (active ? sideLinks.get(active.id) : overview)?.setAttribute("aria-current", "true");
+  };
+
+  window.addEventListener("scroll", () => {
+    if (queued) return;
+    queued = true;
+    window.requestAnimationFrame(sync);
+  }, { passive: true });
+
+  window.addEventListener("resize", sync, { passive: true });
+  sync();
 }
 
 /* Feedback never relies on colour alone: the label changes too (AGENTS.md 8). */
