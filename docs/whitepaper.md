@@ -149,7 +149,17 @@ A newer case brief implementation independently converts a deterministic context
 
 Those implementations share the same boundary strongly enough to justify a small pattern library.
 
-## 9. Status
+## 9. Clipboard as a coordination bus
+
+The same primitive can coordinate more than one human/model pair.
+
+A Meeting Brief Relay gives two people the same preparation questions and return schema. Each person prepares independently with the model of their choice, reviews the result, then shares only a small JSON packet. A final orchestrator receives both packets and produces shared ground, explicit differences, open questions and a proposed agenda.
+
+The important part is that orchestration does not mean averaging. The system should preserve disagreement and uncertainty rather than manufacture consensus.
+
+This is useful because it demonstrates a broader property of clipboard offboarding: typed text can act as a tiny, human-mediated coordination layer across people and AI systems without requiring shared accounts or infrastructure.
+
+## 10. Status
 
 This is not a standard, protocol body, SDK or attempt to make copy/paste sound more sophisticated than it is.
 
