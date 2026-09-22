@@ -49,7 +49,9 @@ The common boundary is not the button. It is the transformation immediately befo
 | Selection Offboard | current filter / selected records | focused analysis |
 | Typed Offboard | JSON or another schema | predictable downstream use |
 | Copy + Open | payload, then provider link | low-friction handoff |
-| Roundtrip Offboard | export + structured import contract | bring results back into the app |\n| Meeting Brief Relay | same prompt → separate JSON returns → orchestrated brief | prepare two or more people without a shared AI workspace |
+| Roundtrip Offboard | export + structured import contract | bring results back into the app |
+| Meeting Brief Relay | same prompt → separate JSON returns → orchestrated brief | prepare two or more people without a shared AI workspace |
+| Rate + Comment Loop | examples → human ratings/comments → next batch | teach an LLM preferences without embedding it |
 
 The site demonstrates each pattern as a reusable interface primitive.
 
@@ -118,11 +120,15 @@ The repository is Pages-ready from the repo root. Enable **Settings → Pages �
 index.html            reference site + live specimens
 styles.css            site and component styling
 src/
-  offboard.js         tiny clipboard / transformation library\n  meeting-brief.js    compound multi-person meeting workflow
+  offboard.js         tiny clipboard / transformation library
+  meeting-brief.js    compound multi-person meeting workflow
+  feedback-loop.js    rate/comment preference loop
 docs/
   whitepaper.md       why this pattern exists
   patterns.md         pattern definitions and boundaries
-  implementation.md   UX, accessibility and security notes\n  meeting-brief.md    two-person JSON relay + neutral orchestration
+  implementation.md   UX, accessibility and security notes
+  meeting-brief.md    two-person JSON relay + neutral orchestration
+  feedback-loop.md    examples → ratings/comments → refinement
 examples/
   README.md           how to contribute real implementations
 AGENTS.md              development rules for coding agents
