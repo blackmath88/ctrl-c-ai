@@ -146,4 +146,4 @@ Use Selection when scope is the key interaction.
 
 Use Typed when downstream structure matters.
 
-Use Roundtrip when the result must come home.
+Use Roundtrip when the result must come home.\n\nUse Meeting Brief Relay when several humans need independent preparation plus a shared synthesis.
