@@ -12,7 +12,6 @@
   <header class="topbar">
     <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">^C</span><span>ctrl-c-ai</span></a>
     <nav class="topnav" aria-label="Primary">
-      <a href="#patterns">Patterns</a>
       <a href="#specimens">Specimens</a>
       <a href="#architecture">Architecture</a>
       <a href="./docs/whitepaper.md">Paper</a>
@@ -51,7 +50,8 @@
           <p class="lede">
             A deliberately low-tech pattern library for turning application state into portable,
             inspectable context for any LLM. Eight patterns, each shown on a fictional product
-            with a working clipboard action. The products are invented; the workflows are not.
+            with a working clipboard action and an inspector showing exactly what leaves the page.
+            The products are invented; the workflows are not.
           </p>
         </div>
         <div class="protocol">
@@ -61,26 +61,6 @@
           <div class="protocol-row"><span>04</span><span>PASTE</span></div>
           <div class="protocol-row"><span>05</span><span>THINK</span></div>
           <p class="protocol-note">The button is boring. The thing worth designing is what crosses the boundary.</p>
-        </div>
-      </section>
-
-      <section class="section" id="patterns">
-        <div class="section-head">
-          <div>
-            <p class="kicker">Pattern index</p>
-            <h2>Eight tiny ways to avoid building a platform.</h2>
-          </div>
-          <p>The cards are only the map. Every pattern below gets its own product surface, a working clipboard action, and an inspector showing exactly what leaves the page.</p>
-        </div>
-        <div class="pattern-index">
-          <a href="#context"><b>01</b><span>Context</span><small>state → brief</small></a>
-          <a href="#prompt"><b>02</b><span>Prompt</span><small>state + task</small></a>
-          <a href="#selection"><b>03</b><span>Selection</span><small>current view only</small></a>
-          <a href="#typed"><b>04</b><span>Typed</span><small>schema → JSON</small></a>
-          <a href="#copy-open"><b>05</b><span>Copy + Open</span><small>copy then destination</small></a>
-          <a href="#roundtrip"><b>06</b><span>Roundtrip</span><small>export ↔ import</small></a>
-          <a href="#meeting-brief"><b>07</b><span>Meeting relay</span><small>two people → one brief</small></a>
-          <a href="#feedback-loop"><b>08</b><span>Feedback loop</span><small>examples → preference</small></a>
         </div>
       </section>
 
