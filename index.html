@@ -3,40 +3,40 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="description" content="ctrl-c-ai — performative clipboard-mediated AI handoff patterns">
+  <meta name="description" content="ctrl-c-ai — clipboard-mediated AI handoff patterns. The transformation is the product; the button is boring.">
   <title>ctrl-c-ai — when MCP is too much</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f0ebe3'/%3E%3Crect x='2.5' y='2.5' width='27' height='27' fill='none' stroke='%23050505' stroke-width='2'/%3E%3Ctext x='16' y='22' font-family='monospace' font-size='16' font-weight='700' text-anchor='middle' fill='%23050505'%3E^C%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#top"><span class="brand-mark">⌘C</span><span>ctrl-c-ai</span></a>
+    <a class="brand" href="#top"><span class="brand-mark" aria-hidden="true">^C</span><span>ctrl-c-ai</span></a>
     <nav class="topnav" aria-label="Primary">
       <a href="#patterns">Patterns</a>
       <a href="#specimens">Specimens</a>
       <a href="#architecture">Architecture</a>
       <a href="./docs/whitepaper.md">Paper</a>
     </nav>
-    <a class="github-link" href="https://github.com/blackmath88/ctrl-c-ai">GitHub ↗</a>
+    <a class="repo-link" href="https://github.com/blackmath88/ctrl-c-ai">GitHub ↗</a>
   </header>
 
   <div class="layout" id="top">
-    <aside class="sidebar" aria-label="Documentation">
-      <div class="search-fake">Search patterns… <span style="margin-left:auto">⌘ K</span></div>
-
+    <aside class="sidebar" aria-label="Contents">
       <div class="nav-label">Documentation</div>
-      <a class="side-link active" href="#top"><span>Overview</span></a>
+      <a class="side-link" href="#top" aria-current="true"><span>Overview</span></a>
       <a class="side-link" href="./docs/whitepaper.md"><span>Why clipboard?</span></a>
+      <a class="side-link" href="./docs/patterns.md"><span>Pattern catalogue</span></a>
       <a class="side-link" href="./docs/implementation.md"><span>Implementation</span></a>
 
-      <div class="nav-label">Performative specimens</div>
-      <a class="side-link" href="#context"><span>Context / Night Shift</span><span class="badge">01</span></a>
-      <a class="side-link" href="#prompt"><span>Prompt / Bakery</span><span class="badge">02</span></a>
-      <a class="side-link" href="#selection"><span>Selection / Lost & Found</span><span class="badge">03</span></a>
-      <a class="side-link" href="#typed"><span>Typed / Plant Clinic</span><span class="badge">04</span></a>
-      <a class="side-link" href="#copy-open"><span>Copy + Open / Radio Desk</span><span class="badge">05</span></a>
-      <a class="side-link" href="#roundtrip"><span>Roundtrip / Bug Laundry</span><span class="badge">06</span></a>
-      <a class="side-link" href="#meeting-brief"><span>Meeting / Cactus Treaty</span><span class="badge">07</span></a>
-      <a class="side-link" href="#feedback-loop"><span>Feedback / Name-O-Matic</span><span class="badge">08</span></a>
+      <div class="nav-label">Specimens</div>
+      <a class="side-link" href="#context"><span>Context</span><span class="badge">01</span></a>
+      <a class="side-link" href="#prompt"><span>Prompt</span><span class="badge">02</span></a>
+      <a class="side-link" href="#selection"><span>Selection</span><span class="badge">03</span></a>
+      <a class="side-link" href="#typed"><span>Typed</span><span class="badge">04</span></a>
+      <a class="side-link" href="#copy-open"><span>Copy + Open</span><span class="badge">05</span></a>
+      <a class="side-link" href="#roundtrip"><span>Roundtrip</span><span class="badge">06</span></a>
+      <a class="side-link" href="#meeting-brief"><span>Meeting relay</span><span class="badge">07</span></a>
+      <a class="side-link" href="#feedback-loop"><span>Feedback loop</span><span class="badge">08</span></a>
 
       <div class="nav-label">Reference</div>
       <a class="side-link" href="#architecture"><span>Integration ladder</span></a>
@@ -44,32 +44,33 @@
     </aside>
 
     <main>
-      <section class="hero">
+      <section class="masthead">
         <div>
-          <div class="kicker">Human-mediated integration · v0.2</div>
+          <p class="kicker">Human-mediated integration · v0.2</p>
           <h1>Sometimes the integration you need is a copy button.</h1>
-          <p>
+          <p class="lede">
             A deliberately low-tech pattern library for turning application state into portable,
-            inspectable context for any LLM. The examples below are fictional, but the workflows are real.
+            inspectable context for any LLM. Eight patterns, each shown on a fictional product
+            with a working clipboard action. The products are invented; the workflows are not.
           </p>
         </div>
-        <div class="protocol" aria-label="Protocol">
+        <div class="protocol">
           <div class="protocol-row"><span>01</span><span>STATE</span></div>
           <div class="protocol-row"><span>02</span><span>TRANSFORM</span></div>
           <div class="protocol-row"><span>03</span><span>COPY</span></div>
           <div class="protocol-row"><span>04</span><span>PASTE</span></div>
           <div class="protocol-row"><span>05</span><span>THINK</span></div>
-          <div class="protocol-note">The button is boring. The thing worth designing is what crosses the boundary.</div>
+          <p class="protocol-note">The button is boring. The thing worth designing is what crosses the boundary.</p>
         </div>
       </section>
 
       <section class="section" id="patterns">
         <div class="section-head">
           <div>
-            <div class="kicker">Pattern index</div>
+            <p class="kicker">Pattern index</p>
             <h2>Eight tiny ways to avoid building a platform.</h2>
           </div>
-          <p>The cards are only the map. Every pattern below gets its own fictional product surface and a working clipboard action.</p>
+          <p>The cards are only the map. Every pattern below gets its own product surface, a working clipboard action, and an inspector showing exactly what leaves the page.</p>
         </div>
         <div class="pattern-index">
           <a href="#context"><b>01</b><span>Context</span><small>state → brief</small></a>
@@ -78,16 +79,17 @@
           <a href="#typed"><b>04</b><span>Typed</span><small>schema → JSON</small></a>
           <a href="#copy-open"><b>05</b><span>Copy + Open</span><small>copy then destination</small></a>
           <a href="#roundtrip"><b>06</b><span>Roundtrip</span><small>export ↔ import</small></a>
-          <a href="#meeting-brief"><b>07</b><span>Meeting Relay</span><small>two people → one brief</small></a>
-          <a href="#feedback-loop"><b>08</b><span>Feedback Loop</span><small>examples → preference</small></a>
+          <a href="#meeting-brief"><b>07</b><span>Meeting relay</span><small>two people → one brief</small></a>
+          <a href="#feedback-loop"><b>08</b><span>Feedback loop</span><small>examples → preference</small></a>
         </div>
       </section>
 
       <div id="specimens">
 
+        <!-- 01 ................................................................ -->
         <section class="case-section case-terminal" id="context">
           <div class="case-meta">
-            <span>01 · CONTEXT OFFBOARD</span>
+            <span>01 · Context offboard</span>
             <strong>Fictional product: Museum Night Shift Console</strong>
           </div>
           <div class="case-copy">
@@ -95,7 +97,7 @@
             <p>A museum guard has a gloriously boring incident console. Instead of integrating an AI assistant into the security system, the console turns the current incident into a clean Markdown handoff.</p>
           </div>
           <div class="terminal-shell">
-            <div class="terminal-bar"><span>ARCHEOLOGY_WING / INCIDENT 23:47</span><span>● local only</span></div>
+            <div class="terminal-bar"><span>ARCHEOLOGY_WING / INCIDENT 23:47</span><span>local only</span></div>
             <div class="terminal-grid">
               <div>
                 <p><span class="term-key">sensor</span> Motion detected in Gallery 4</p>
@@ -106,16 +108,20 @@
               <div class="terminal-action">
                 <small>Shift handoff</small>
                 <p>Packages only this incident, not the entire museum log.</p>
-                <button class="term-button" data-demo="context">COPY INCIDENT BRIEF</button>
+                <button class="action" data-demo="context">Copy incident brief</button>
               </div>
             </div>
           </div>
+          <details class="inspect" data-inspect="context">
+            <summary>Inspect what gets copied</summary>
+          </details>
         </section>
 
+        <!-- 02 ................................................................ -->
         <section class="case-section case-bakery" id="prompt">
           <div class="case-meta">
-            <span>02 · PROMPT OFFBOARD</span>
-            <strong>Fictional product: Crumb & Consequence</strong>
+            <span>02 · Prompt offboard</span>
+            <strong>Fictional product: Crumb &amp; Consequence</strong>
           </div>
           <div class="case-copy">
             <h2>The croissant is fine. The sign is not.</h2>
@@ -126,36 +132,44 @@
             <div class="chalk-item"><span>Burnt Honey Croissant</span><b>4.80</b></div>
             <p class="chalk-note">Current sign: "Indulge in an artisanal moment of flaky excellence."</p>
             <div class="chalk-task">TASK → Make it sound like a human bakery. Dry wit welcome. No "elevated", "journey", or "crafted with passion".</div>
-            <button class="chalk-button" data-demo="prompt">STEAL THIS PROBLEM → AI</button>
+            <button class="action" data-demo="prompt">Steal this problem → AI</button>
+            <details class="inspect" data-inspect="prompt">
+              <summary>Inspect what gets copied</summary>
+            </details>
           </div>
         </section>
 
+        <!-- 03 ................................................................ -->
         <section class="case-section case-lost" id="selection">
           <div class="case-meta">
-            <span>03 · SELECTION OFFBOARD</span>
-            <strong>Fictional product: Terminal 9 Lost & Found</strong>
+            <span>03 · Selection offboard</span>
+            <strong>Fictional product: Terminal 9 Lost &amp; Found</strong>
           </div>
           <div class="case-copy">
             <h2>Please identify the least plausible owner.</h2>
             <p>The app has 842 objects. The human filtered to three weirdly similar black umbrellas. Only the current selection should cross the boundary.</p>
           </div>
           <div class="lost-ui">
-            <div class="lost-toolbar"><span>Lost & Found / umbrellas / black / mildly cursed</span><b>3 selected</b></div>
+            <div class="lost-toolbar"><span>Lost &amp; Found / umbrellas / black / mildly cursed</span><b>3 selected</b></div>
             <div class="lost-list">
-              <label><input type="checkbox" checked> <span>#U-114</span><strong>Black umbrella</strong><em>tiny plastic duck taped to handle</em></label>
-              <label><input type="checkbox" checked> <span>#U-201</span><strong>Black umbrella</strong><em>smells strongly of peppermint</em></label>
-              <label><input type="checkbox" checked> <span>#U-330</span><strong>Black umbrella</strong><em>engraving: "NOT YOURS, MARTIN"</em></label>
+              <label><input class="check" type="checkbox" checked> <span>#U-114</span><strong>Black umbrella</strong><em>tiny plastic duck taped to handle</em></label>
+              <label><input class="check" type="checkbox" checked> <span>#U-201</span><strong>Black umbrella</strong><em>smells strongly of peppermint</em></label>
+              <label><input class="check" type="checkbox" checked> <span>#U-330</span><strong>Black umbrella</strong><em>engraving: "NOT YOURS, MARTIN"</em></label>
             </div>
             <div class="lost-footer">
               <span>842 total records remain blissfully uninvolved.</span>
-              <button data-demo="selection">ASK AI ABOUT 3 SELECTED</button>
+              <button class="action" data-demo="selection">Ask AI about 3 selected</button>
             </div>
           </div>
+          <details class="inspect" data-inspect="selection">
+            <summary>Inspect what gets copied</summary>
+          </details>
         </section>
 
+        <!-- 04 ................................................................ -->
         <section class="case-section case-lab" id="typed">
           <div class="case-meta">
-            <span>04 · TYPED OFFBOARD</span>
+            <span>04 · Typed offboard</span>
             <strong>Fictional product: Plant Clinic 3000</strong>
           </div>
           <div class="case-copy">
@@ -170,20 +184,19 @@
               <div><small>LIGHT</small><strong>north window</strong></div>
               <div><small>OWNER THEORY</small><strong>"dramatic personality"</strong></div>
             </div>
-            <pre>{
-  "schema": "plant-clinic/triage/v1",
-  "symptoms": ["brown tips"],
-  "soil": "damp",
-  "light": "north",
-  "question": "rank likely causes"
-}</pre>
-            <button class="lab-button" data-demo="typed">COPY DIAGNOSTIC JSON</button>
+            <div class="lab-foot">
+              <button class="action" data-demo="typed">Copy diagnostic JSON</button>
+              <details class="inspect" data-inspect="typed" open>
+                <summary>Inspect what gets copied</summary>
+              </details>
+            </div>
           </div>
         </section>
 
+        <!-- 05 ................................................................ -->
         <section class="case-section case-radio" id="copy-open">
           <div class="case-meta">
-            <span>05 · COPY + OPEN</span>
+            <span>05 · Copy + open</span>
             <strong>Fictional product: Small Town Radio Desk</strong>
           </div>
           <div class="case-copy">
@@ -197,15 +210,19 @@
               <p>Bridge closed for goats · school fête moved indoors · mayor insists the goose is "not an official mascot".</p>
             </div>
             <div class="radio-buttons">
-              <button data-demo="radio" data-open="https://chatgpt.com">COPY + OPEN CHATGPT</button>
-              <button data-demo="radio" data-open="https://claude.ai">COPY + OPEN CLAUDE</button>
+              <button class="action" data-demo="radio" data-open="https://chatgpt.com">Copy + open ChatGPT</button>
+              <button class="action" data-demo="radio" data-open="https://claude.ai">Copy + open Claude</button>
             </div>
           </div>
+          <details class="inspect" data-inspect="radio">
+            <summary>Inspect what gets copied</summary>
+          </details>
         </section>
 
+        <!-- 06 ................................................................ -->
         <section class="case-section case-bugs" id="roundtrip">
           <div class="case-meta">
-            <span>06 · ROUNDTRIP OFFBOARD</span>
+            <span>06 · Roundtrip offboard</span>
             <strong>Fictional product: Bug Laundry</strong>
           </div>
           <div class="case-copy">
@@ -218,20 +235,29 @@
               <div class="sock">Login button occasionally becomes French.</div>
               <div class="sock">Invoice PDF prints one haunted blank page.</div>
               <div class="sock">Dark mode makes the legal footer disappear, which legal has opinions about.</div>
-              <button class="laundry-button" data-demo="roundtrip">COPY TRIAGE JOB</button>
+              <button class="action" data-demo="roundtrip">Copy triage job</button>
             </div>
-            <div class="washer">↻<small>LLM</small></div>
+            <div class="transfer" aria-hidden="true">
+              <svg width="34" height="34" viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.25">
+                <path d="M5 13h20l-5-5M29 21H9l5 5"/>
+              </svg>
+              <small>LLM</small>
+            </div>
             <div class="laundry-col clean">
               <h3>EXPECTED RETURN</h3>
               <code>severity</code><code>likely_area</code><code>repro_steps</code><code>needs_human</code>
               <div class="import-slot">Paste validated JSON back here later.</div>
             </div>
           </div>
+          <details class="inspect" data-inspect="roundtrip">
+            <summary>Inspect what gets copied</summary>
+          </details>
         </section>
 
+        <!-- 07 ................................................................ -->
         <section class="case-section case-meeting" id="meeting-brief">
           <div class="case-meta">
-            <span>07 · MEETING BRIEF RELAY</span>
+            <span>07 · Meeting brief relay</span>
             <strong>Fictional product: Treaty Table</strong>
           </div>
           <div class="case-copy">
@@ -240,29 +266,33 @@
           </div>
           <div class="meeting-ui">
             <div class="meeting-person">
-              <div class="avatar-round">L</div>
+              <div class="avatar-round" aria-hidden="true">L</div>
               <strong>Lina</strong>
               <span>Goal: cactus survives</span>
-              <button data-demo="meeting-lina">COPY LINA'S PREP</button>
+              <button class="action action-quiet" data-demo="meeting-lina">Copy Lina's prep</button>
             </div>
             <div class="meeting-center">
               <div class="meeting-title">THURSDAY · 14:00 · 15 MIN</div>
               <h3>Cactus Placement Treaty</h3>
               <div class="meeting-flow">private prep → JSON A + JSON B → neutral brief</div>
-              <button class="orchestrate-button" id="copy-orchestrator">COPY ORCHESTRATOR PACK</button>
+              <button class="action" id="copy-orchestrator">Copy orchestrator pack</button>
             </div>
             <div class="meeting-person">
-              <div class="avatar-round">M</div>
+              <div class="avatar-round" aria-hidden="true">M</div>
               <strong>Max</strong>
               <span>Goal: retain window dignity</span>
-              <button data-demo="meeting-max">COPY MAX'S PREP</button>
+              <button class="action action-quiet" data-demo="meeting-max">Copy Max's prep</button>
             </div>
           </div>
+          <details class="inspect" data-inspect="meeting-lina">
+            <summary>Inspect Lina's prep pack</summary>
+          </details>
         </section>
 
+        <!-- 08 ................................................................ -->
         <section class="case-section case-feedback" id="feedback-loop">
           <div class="case-meta">
-            <span>08 · RATE + COMMENT FEEDBACK LOOP</span>
+            <span>08 · Rate + comment feedback loop</span>
             <strong>Fictional product: Name-O-Matic Deluxe</strong>
           </div>
           <div class="case-copy">
@@ -273,26 +303,59 @@
             <div class="review-top"><b>NAME-O-MATIC DELUXE</b><span>brief: name a tiny AI handoff tool</span></div>
             <div class="review-grid">
               <article class="review-card" data-feedback-id="ex-01">
-                <small>OPTION 01</small><h3>Pasteport</h3><p>Portable context, passport-ish, maybe too pleased with itself.</p>
-                <div class="stars" data-rating="0"><button>★</button><button>★</button><button>★</button><button>★</button><button>★</button></div>
-                <input class="feedback-comment" placeholder="why / why not?">
+                <small>OPTION 01</small>
+                <h3>Pasteport</h3>
+                <p>Portable context, passport-ish, maybe too pleased with itself.</p>
+                <fieldset class="stars">
+                  <legend class="visually-hidden">Rate Pasteport</legend>
+                  <input type="radio" name="rate-ex-01" id="rate-ex-01-5" value="5"><label for="rate-ex-01-5" title="5 stars">★</label>
+                  <input type="radio" name="rate-ex-01" id="rate-ex-01-4" value="4"><label for="rate-ex-01-4" title="4 stars">★</label>
+                  <input type="radio" name="rate-ex-01" id="rate-ex-01-3" value="3"><label for="rate-ex-01-3" title="3 stars">★</label>
+                  <input type="radio" name="rate-ex-01" id="rate-ex-01-2" value="2"><label for="rate-ex-01-2" title="2 stars">★</label>
+                  <input type="radio" name="rate-ex-01" id="rate-ex-01-1" value="1"><label for="rate-ex-01-1" title="1 star">★</label>
+                </fieldset>
+                <label class="visually-hidden" for="note-ex-01">Why or why not — Pasteport</label>
+                <input class="feedback-comment" id="note-ex-01" placeholder="why / why not?">
               </article>
               <article class="review-card" data-feedback-id="ex-02">
-                <small>OPTION 02</small><h3>Context Ferry</h3><p>Accurate. Also sounds like public transport for PDFs.</p>
-                <div class="stars" data-rating="0"><button>★</button><button>★</button><button>★</button><button>★</button><button>★</button></div>
-                <input class="feedback-comment" placeholder="why / why not?">
+                <small>OPTION 02</small>
+                <h3>Context Ferry</h3>
+                <p>Accurate. Also sounds like public transport for PDFs.</p>
+                <fieldset class="stars">
+                  <legend class="visually-hidden">Rate Context Ferry</legend>
+                  <input type="radio" name="rate-ex-02" id="rate-ex-02-5" value="5"><label for="rate-ex-02-5" title="5 stars">★</label>
+                  <input type="radio" name="rate-ex-02" id="rate-ex-02-4" value="4"><label for="rate-ex-02-4" title="4 stars">★</label>
+                  <input type="radio" name="rate-ex-02" id="rate-ex-02-3" value="3"><label for="rate-ex-02-3" title="3 stars">★</label>
+                  <input type="radio" name="rate-ex-02" id="rate-ex-02-2" value="2"><label for="rate-ex-02-2" title="2 stars">★</label>
+                  <input type="radio" name="rate-ex-02" id="rate-ex-02-1" value="1"><label for="rate-ex-02-1" title="1 star">★</label>
+                </fieldset>
+                <label class="visually-hidden" for="note-ex-02">Why or why not — Context Ferry</label>
+                <input class="feedback-comment" id="note-ex-02" placeholder="why / why not?">
               </article>
               <article class="review-card" data-feedback-id="ex-03">
-                <small>OPTION 03</small><h3>Ctrl-C AI</h3><p>Not subtle. Extremely honest. The repo already exists.</p>
-                <div class="stars" data-rating="0"><button>★</button><button>★</button><button>★</button><button>★</button><button>★</button></div>
-                <input class="feedback-comment" placeholder="why / why not?">
+                <small>OPTION 03</small>
+                <h3>Ctrl-C AI</h3>
+                <p>Not subtle. Extremely honest. The repo already exists.</p>
+                <fieldset class="stars">
+                  <legend class="visually-hidden">Rate Ctrl-C AI</legend>
+                  <input type="radio" name="rate-ex-03" id="rate-ex-03-5" value="5"><label for="rate-ex-03-5" title="5 stars">★</label>
+                  <input type="radio" name="rate-ex-03" id="rate-ex-03-4" value="4"><label for="rate-ex-03-4" title="4 stars">★</label>
+                  <input type="radio" name="rate-ex-03" id="rate-ex-03-3" value="3"><label for="rate-ex-03-3" title="3 stars">★</label>
+                  <input type="radio" name="rate-ex-03" id="rate-ex-03-2" value="2"><label for="rate-ex-03-2" title="2 stars">★</label>
+                  <input type="radio" name="rate-ex-03" id="rate-ex-03-1" value="1"><label for="rate-ex-03-1" title="1 star">★</label>
+                </fieldset>
+                <label class="visually-hidden" for="note-ex-03">Why or why not — Ctrl-C AI</label>
+                <input class="feedback-comment" id="note-ex-03" placeholder="why / why not?">
               </article>
             </div>
             <div class="review-bottom">
-              <button data-demo="feedback">COPY STARTER PROMPT</button>
-              <button class="review-primary" id="copy-feedback">COPY MY FEEDBACK → NEXT ROUND</button>
+              <button class="action action-quiet" data-demo="feedback">Copy starter prompt</button>
+              <button class="action" id="copy-feedback">Copy my feedback → next round</button>
             </div>
           </div>
+          <details class="inspect" data-inspect="feedback">
+            <summary>Inspect the starter prompt</summary>
+          </details>
         </section>
 
       </div>
@@ -300,19 +363,19 @@
       <section class="section" id="architecture">
         <div class="section-head">
           <div>
-            <div class="kicker">Progressive integration</div>
+            <p class="kicker">Progressive integration</p>
             <h2>Use the smallest rung that works.</h2>
           </div>
           <p>Clipboard offboarding is intentionally near the bottom of the ladder. That is a feature, not an embarrassment.</p>
         </div>
         <div class="ladder">
-          <div class="ladder-step active"><strong>Clipboard</strong><p>Visible, manual, provider-agnostic.</p></div>
+          <div class="ladder-step" data-current><strong>Clipboard</strong><p>Visible, manual, provider-agnostic.</p></div>
           <div class="ladder-step"><strong>Deep link</strong><p>Copy + open a destination.</p></div>
           <div class="ladder-step"><strong>API</strong><p>Automated transport with credentials.</p></div>
           <div class="ladder-step"><strong>MCP</strong><p>Explicit model-visible capability surface.</p></div>
           <div class="ladder-step"><strong>Agent</strong><p>Persistent orchestration and authority.</p></div>
         </div>
-        <div class="callout"><strong>Escalation rule:</strong> when the clipboard starts feeling ridiculous at your actual scale, congratulations — you have evidence for a deeper integration.</div>
+        <p class="callout"><strong>Escalation rule:</strong> when the clipboard starts feeling ridiculous at your actual scale, congratulations — you have evidence for a deeper integration.</p>
       </section>
 
       <footer class="footer">
@@ -322,7 +385,7 @@
     </main>
   </div>
 
-  <div class="toast" id="toast" role="status"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script type="module" src="./site.js"></script>
 </body>
 </html>
