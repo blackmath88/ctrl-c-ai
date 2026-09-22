@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="description" content="ctrl-c-ai — simple clipboard handoffs between small tools and LLMs">
   <title>ctrl-c-ai — copy, paste, continue</title>
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="icon" type="image/webp" href="./assets/ctrl-c-ai-logo.webp">\n  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="#top"><span class="brand-mark">⌘C</span><span>ctrl-c-ai</span></a>
+    <a class="brand" href="#top"><span class="brand-mark"><img src="./assets/ctrl-c-ai-logo.webp" alt=""></span><span>ctrl-c-ai</span></a>
     <nav class="topnav" aria-label="Primary">
       <a href="#uses">Use cases</a>
       <a href="#why">Why</a>
@@ -44,10 +44,10 @@
             copy it, and continue in whatever LLM you already use.
           </p>
         </div>
-        <div class="hero-rule">
-          <span>tool state</span><b>→</b><span>useful prompt / JSON / Markdown</span><b>→</b><span>clipboard</span>
-          <small>No API key. No model choice baked into the tool.</small>
-        </div>
+        <figure class="hero-visual">
+          <img src="./assets/clipboard-handoff-hero.webp" alt="A small tool packages its current state as prompt, JSON or Markdown, copies it through the clipboard, and hands it to an LLM workspace.">
+          <figcaption>tool state → useful payload → clipboard → your LLM</figcaption>
+        </figure>
       </section>
 
       <section class="intro section" id="uses">
