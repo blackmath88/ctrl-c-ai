@@ -1,4 +1,4 @@
-import { copyAndOpen, composePrompt, offboard, toJSON, toMarkdown } from "./src/offboard.js";
+import { copyAndOpen, composePrompt, offboard, toJSON, toMarkdown } from "./src/offboard.js";\nimport { meetingParticipantPrompt } from "./src/meeting-brief.js";
 
 const $ = selector => document.querySelector(selector);
 const toast = $("#toast");
