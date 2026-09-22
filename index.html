@@ -33,7 +33,9 @@
       <a class="side-link" href="#prompt"><span>Prompt Offboard</span><span class="badge">02</span></a>
       <a class="side-link" href="#selection"><span>Selection Offboard</span><span class="badge">03</span></a>
       <a class="side-link" href="#typed"><span>Typed Offboard</span><span class="badge">04</span></a>
-      <a class="side-link" href="#roundtrip"><span>Roundtrip</span><span class="badge">05</span></a>\n      <a class="side-link" href="#meeting-brief"><span>Meeting Brief Relay</span><span class="badge">06</span></a>
+      <a class="side-link" href="#roundtrip"><span>Roundtrip</span><span class="badge">05</span></a>
+      <a class="side-link" href="#meeting-brief"><span>Meeting Brief Relay</span><span class="badge">06</span></a>
+      <a class="side-link" href="#feedback-loop"><span>Rate + Comment Loop</span><span class="badge">07</span></a>
 
       <div class="nav-label">Reference</div>
       <a class="side-link" href="#architecture"><span>Integration ladder</span></a>
@@ -123,6 +125,16 @@
             <div class="card-actions">
               <button class="btn btn-primary" data-demo="meeting">Copy participant pack</button>
               <a class="btn" href="./docs/meeting-brief.md">See workflow</a>
+            </div>
+          </article>
+
+          <article class="card" id="feedback-loop">
+            <div class="card-number">08 / EXAMPLES → RATE + COMMENT → NEXT BATCH</div>
+            <h3>Rate + Comment Loop</h3>
+            <p>Ask the LLM for concrete examples, rate them in a tiny UI, annotate why, then offboard that feedback as the next prompt. Human preference becomes structured state.</p>
+            <div class="card-actions">
+              <button class="btn btn-primary" data-demo="feedback">Copy starter prompt</button>
+              <a class="btn" href="./docs/feedback-loop.md">See loop</a>
             </div>
           </article>
         </div>
