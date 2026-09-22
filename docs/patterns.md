@@ -136,6 +136,45 @@ The app must still treat model output as untrusted input.
 
 ---
 
+## Rate + Comment Feedback Loop
+
+**Intent:** ask an LLM for several examples, let a human rate/comment on them in a lightweight UI, then send that explicit preference signal back for the next iteration.
+
+**Input:** a generation goal, several structured examples, human ratings and comments.
+
+**Transform:** examples → evaluation UI → typed feedback packet → refinement prompt.
+
+Sequence:
+
+```text
+prompt
+  ↓
+LLM generates examples
+  ↓
+human rates + comments
+  ↓
+feedback JSON
+  ↓
+LLM generates next batch
+  ↺
+```
+
+The rating is not the interesting part by itself. The useful signal is **rating + reason**.
+
+A simple example:
+
+```text
+A  ★★☆☆☆  "too generic"
+B  ★★★★★  "concrete, slightly strange — more like this"
+C  ★★★★☆  "good structure, too long"
+```
+
+Use this for naming, microcopy, workshop formats, scenarios, tone calibration, synthetic examples and other preference-heavy creative work.
+
+See [Rate + Comment Feedback Loop](./feedback-loop.md) and `src/feedback-loop.js`.
+
+---
+
 ## Pattern selection heuristic
 
 Use Context when the destination mainly needs **state**.
@@ -146,4 +185,9 @@ Use Selection when scope is the key interaction.
 
 Use Typed when downstream structure matters.
 
-Use Roundtrip when the result must come home.\n\nUse Meeting Brief Relay when several humans need independent preparation plus a shared synthesis.
+Use Roundtrip when the result must come home.
+
+Use Meeting Brief Relay when several humans need independent preparation plus a shared synthesis.
+
+
+Use Rate + Comment Loop when preference is easiest to express by reacting to concrete examples rather than writing another abstract prompt.
